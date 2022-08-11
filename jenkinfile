@@ -1,18 +1,16 @@
 pipeline {
     agent any
-
     stages {
-        stage('Git checkout') {
-            steps {
-                // Get some code from a GitHub repository
-                git 'https://github.com/Mannan-Bablu/push-from-jk-nexus.git'
-            }
+	stage('Git checkout') {
+	    steps {
+		git 'https://github.com/Mannan-Bablu/push-from-jk-nexus.git'
+	    }
         }
-	    stage('Create-Image') {
-                // Build the images from dockerfile
-	        steps {
-			    sh 'docker build -t="mynginx:latest" .'
-            }
+	 stage('Create-Image') {
+		// Build the images from dockerfile
+              steps {
+                  sh 'docker build -t="mynginx:latest" .'
+		    }
         }
 		stage('Nexus-Credentials') {
 		    steps {
