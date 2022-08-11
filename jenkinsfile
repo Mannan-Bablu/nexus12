@@ -1,0 +1,28 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Git checkout') {
+            steps {
+                // Get some code from a GitHub repository
+                git 'https://github.com/Mannan-Bablu/push-from-jk-nexus.git'
+            }
+        }
+		    stage('Create-Image') {
+                // Build the images from dockerfile
+			      steps {
+				        sh 'docker build -t="8184848757/pipeline:latest" .'
+			      }
+	      }
+		    stage('Dockerpush') {
+			      steps {
+				        sh 'docker push 8184848757/pipeline '
+			      }
+	      }
+		    stage('create container') {
+			      steps {
+				        sh 'docker run -d -p 95:80 -v /home/ubuntu:/var/www/html 8184848757/pipeline'
+			      }
+		    }
+	  }
+}
