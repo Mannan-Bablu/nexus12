@@ -1,1 +1,1 @@
-# push-from-jk-nexus
+# PUSHING an image to nexus via jenkins
